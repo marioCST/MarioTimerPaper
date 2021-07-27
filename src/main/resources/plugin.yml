@@ -1,0 +1,20 @@
+name: MarioTimer
+version: 1.0
+main: de.mariocst.mariotimer.TimerMain
+api-version: 1.16
+authors: [ marioCST ]
+description: Timer Plugin by marioCST
+
+commands:
+  timer:
+    description: Einfacher Timer Command
+    permission: mario.timer
+
+permissions:
+  mario.*:
+    description: Alle Rechte zum Mario Plugin!
+    children:
+      mario.timer: true
+  mario.time:
+    description: Rechte für den /timer Command!
+    default: op

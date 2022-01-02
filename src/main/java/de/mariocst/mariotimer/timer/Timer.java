@@ -1,15 +1,12 @@
 package de.mariocst.mariotimer.timer;
 
 import de.mariocst.mariotimer.TimerMain;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Timer {
-
     private boolean running;
     private int seconds;
     private int minutes;
@@ -22,7 +19,8 @@ public class Timer {
 
         if (config.getConfig().contains("timer.seconds")) {
             this.seconds = config.getConfig().getInt("timer.seconds");
-        } else {
+        }
+        else {
             this.seconds = 0;
         }
 
@@ -50,7 +48,8 @@ public class Timer {
 
         if (config.getConfig().contains("timer.seconds")) {
             this.seconds = config.getConfig().getInt("timer.seconds");
-        } else {
+        }
+        else {
             this.seconds = 0;
         }
 
@@ -104,11 +103,9 @@ public class Timer {
     }
 
     public void sendActionBar() {
-
         for (Player player: Bukkit.getOnlinePlayers()) {
-
             if (!isRunning()) {
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED + "Timer ist pausiert"));
+                player.sendActionBar(Component.text("§cTimer ist pausiert!"));
                 continue;
             }
 
@@ -128,23 +125,22 @@ public class Timer {
                 hoursString = "0" + getHours();
             }
 
-            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GOLD.toString() + ChatColor.BOLD + hoursString + ":" + minutesString + ":" + secondsString));
+            player.sendActionBar(Component.text("§6§l" + hoursString + ":" + minutesString + ":" + secondsString));
         }
     }
 
     public void save() {
         Config config = TimerMain.getInstance().getConfiguration();
 
-        config.getConfig().set("timer.seconds", seconds);
-        config.getConfig().set("timer.minutes", minutes);
-        config.getConfig().set("timer.hours", hours);
+        config.getConfig().set("timer.seconds", this.seconds);
+        config.getConfig().set("timer.minutes", this.minutes);
+        config.getConfig().set("timer.hours", this.hours);
     }
 
     private void run() {
         new BukkitRunnable() {
             @Override
             public void run() {
-
                 sendActionBar();
 
                 if (!isRunning()) {

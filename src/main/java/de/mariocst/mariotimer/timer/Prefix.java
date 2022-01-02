@@ -39,10 +39,6 @@ public class Prefix {
         return prefixClass;
     }
 
-    public String getPrefix() {
-        return prefix;
-    }
-
     public void setPrefix(String prefix) {
         this.prefix = prefix;
     }

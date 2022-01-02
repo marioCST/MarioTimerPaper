@@ -4,8 +4,9 @@ import de.mariocst.mariotimer.commands.TimerCommand;
 import de.mariocst.mariotimer.timer.Config;
 import de.mariocst.mariotimer.timer.Prefix;
 import de.mariocst.mariotimer.timer.Timer;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Objects;
 
 public final class TimerMain extends JavaPlugin {
     private static String prefix;
@@ -23,38 +24,39 @@ public final class TimerMain extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        register();
+        this.prefixConfig = new Prefix();
+        this.timer = new Timer();
 
-        prefixConfig = new Prefix();
-        timer = new Timer();
+        this.register();
 
-        log("Timer Plugin von marioCST geladen!");
+        this.log("Timer Plugin von marioCST geladen!");
     }
 
     @Override
     public void onDisable() {
-        saveConfigs();
-        log("Timer Plugin von marioCST entladen!");
+        this.saveConfigs();
+        this.log("Timer Plugin von marioCST entladen!");
     }
 
     public Config getConfiguration() {
-        return config;
+        return this.config;
     }
 
     public void saveConfigs() {
-        prefixConfig.save();
-        timer.save();
-        config.save();
+        this.prefixConfig.save();
+        this.timer.save();
+        this.config.save();
     }
 
     public void reloadConfigs() {
-        config = new Config();
-        prefixConfig.reload();
-        timer.reload();
+        this.config = new Config();
+        this.prefixConfig.reload();
+        this.timer.reload();
     }
 
     private void register() {
-        Bukkit.getPluginCommand("timer").setExecutor(new TimerCommand());
+        Objects.requireNonNull(this.getCommand("timer")).setExecutor(new TimerCommand());
+        Objects.requireNonNull(this.getCommand("timer")).setTabCompleter(new TimerCommand());
     }
 
     public static String getPrefix() {
@@ -66,11 +68,7 @@ public final class TimerMain extends JavaPlugin {
     }
 
     public void log(String text) {
-        Bukkit.getConsoleSender().sendMessage(getPrefix() + text);
-    }
-
-    public void warning(String text) {
-        getLogger().warning(getPrefix() + text);
+        this.getServer().getLogger().info(prefix + text);
     }
 
     public static TimerMain getInstance() {
@@ -78,10 +76,6 @@ public final class TimerMain extends JavaPlugin {
     }
 
     public Timer getTimer() {
-        return timer;
-    }
-
-    public Prefix getPrefixConfig() {
-        return prefixConfig;
+        return this.timer;
     }
 }

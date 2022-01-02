@@ -6,12 +6,10 @@ import java.io.File;
 import java.io.IOException;
 
 public class Config {
-
     private final File file;
     private final YamlConfiguration config;
 
     public Config() {
-
         File dir = new File("./plugins/MarioPlugin");
 
         if (!dir.exists()) {
@@ -42,7 +40,8 @@ public class Config {
     public void save() {
         try {
             config.save(file);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
     }

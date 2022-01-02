@@ -1,20 +1,8 @@
-Mario Plugin für PaperSpigot/Spigot
+**Mario Timer für Paper**
 
+Minecraft/Paper: 1.18.1
+JDK: 17
 
--- Wie benutze ich es? --
+**-- Was ist erlaubt? --**
 
-Downloade alles. Öffne den Ordner Inhalt mit IntelliJ (empfohlen). Nutze das JDK 1.15.
-
-
--- Was ist erlaubt? --
-
-Du darfst alles modifizieren, veröffentlichen und eigentlich alles machen, was du willst.
-Du MUSST aber Credits geben!
-
-
---Was tun, wenn ich Eclipse nutze? --
-
-idk lol
-
-
-P.S.: Bitte teile Fehler und mache Pull Requests mit Bugfixes!
+Dir sind keine Grenzen gesetzt.
